@@ -49,6 +49,26 @@
             const leftSideImages = theLeftSide.cloneNode(true);
             leftSideImages.removeChild(leftSideImages.lastChild);
             theRightSide.appendChild(leftSideImages);
+            theLeftSide.lastChild.addEventListener('click', nextLevel);
+            theLeftSide.addEventListener('click', gameOver);
+        }
+
+        function nextLevel(event) {
+            event.stopPropagation();
+            while (theLeftSide.firstChild) {
+                theLeftSide.removeChild(theLeftSide.firstChild);
+            }
+            while (theRightSide.firstChild) {
+                theRightSide.removeChild(theRightSide.firstChild);
+            }
+            numberOfFaces += 5;
+            generateFaces();
+        }
+
+        function gameOver() {
+            alert('Game Over!')
+            document.body.removeEventListener('click', gameOver);
+            theLeftSide.lastChild.removeEventListener('click', nextLevel);
         }
 
     </script>
